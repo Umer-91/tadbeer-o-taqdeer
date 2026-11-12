@@ -67,8 +67,7 @@ QAOA selects only from measured feasible samples. Exact is used as a reference, 
 | `scripts/build_report.py` | Original report generator; running it overwrites the manually updated final report. Not needed to run the app. |
 | `backend/requirements.lock.txt`, `frontend/package-lock.json` | Pinned dependencies |
 
-The original specifications remain in `MASTER_PLAN.md` and `PHASE_1_QUANTUM.md` through `PHASE_3_INTEGRATION.md`. Historical progress is in `docs/PROGRESS.md`; it is not the current setup guide. The internal Python package name remains `raasta` for compatibility.
-
+The internal Python package name remains `raasta` for compatibility.
 ## Windows PowerShell setup
 
 Requirements: **Python 3.12+**, **Node.js 22+** and npm, plus Git. Development used Python 3.12.10 and Node 24. Use the pinned dependencies. Commands below assume the repository is at `C:\Hackathon`; adjust the path for your checkout. Do not recreate a working environment unnecessarily.
@@ -158,7 +157,6 @@ The runner refuses to overwrite an existing file. The verifier checks saved resu
 ## Submission materials and credits
 
 - [Word report](docs/report.docx), with application and dependency diagrams embedded.
-- [Submission checklist](docs/submission_checklist.md).
 - Team-recorded video is uploaded separately; no private recording script is stored here.
 
 Qiskit and Qiskit Aer execute the quantum workflow. FastAPI serves the API; Next.js, React Three Fiber, Three.js and GSAP support the website. Noto Nastaliq Urdu and Manrope font licenses are in `frontend/public/licenses`. The valley is a procedural illustration, not GIS data.
