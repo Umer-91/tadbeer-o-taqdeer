@@ -8,7 +8,9 @@ This is a reproducible research prototype using a fictional, Pakistan-inspired v
 
 ## Current status
 
-Repository setup and documentation scaffold only. The quantum engine, API, frontend, application tests, and benchmarks have **not** been implemented or run. Do not interpret empty directories as working components. See [progress](docs/PROGRESS.md) and [decisions](docs/DECISIONS.md).
+Phase 1 core is locally verified on `phase-1-quantum`: **86 tests pass**, including real Qiskit/Aer execution, all-state energy equivalence, bit ordering, seeded reproducibility, and circuit export replay. The acceptance run and all nine synthetic scenario/budget experiments are recorded. The API and frontend remain unimplemented. See [progress and push status](docs/PROGRESS.md), [backend setup](backend/README.md), and [decisions](docs/DECISIONS.md).
+
+Default flood/budget 9, seed 42, p=1, 512 shots: QAOA sampled `011100` with utility 96 and 87.5% feasible shots. This best observed score matches exact; the optimizer hit its 60-evaluation cap without convergence. These are small noiseless simulator results, not evidence of quantum advantage.
 
 ## Source specifications
 
@@ -52,7 +54,7 @@ git ls-remote origin refs/heads/main
 git diff --check
 ```
 
-Compare the local HEAD with the remote main hash. No package installation is required for this documentation scaffold. Python 3.11+ is planned; Python/Qiskit and Node/frontend dependencies will be selected, tested, pinned, and locked during their implementation phases. Application installation and execution commands are intentionally deferred until they can be verified.
+Compare the local HEAD with the remote main hash. For the implemented core, switch to `phase-1-quantum` and follow [backend setup](backend/README.md), comparing that branch's local and remote hashes. The pinned numerical stack requires Python 3.12+; quantum validation used the user's Python 3.12.10 and a repository-root virtual environment. Frontend dependencies and execution commands remain deferred to Phase 2.
 
 ## Development workflow
 

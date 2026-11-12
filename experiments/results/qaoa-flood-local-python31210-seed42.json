@@ -1,0 +1,1280 @@
+{
+  "environment": {
+    "timestamp_utc": "2026-11-12T10:26:57.254887+00:00",
+    "python": "3.12.10",
+    "os": "Windows",
+    "os_release": "11",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "packages": {
+      "qiskit": "2.6.2",
+      "qiskit-aer": "0.18.2",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "source_sha256": {
+      "__init__.py": "792b9bd80fe92e700c2897f3a6f2638c062cdf985dbe69e7003b61b0ef317141",
+      "energy.py": "a43e5674c88f73dfbace27acf78c1eba5953b6c7820c1dcfe56700bff0ecd52d",
+      "evaluator.py": "846c65fc75dcd8887dbab98f959ec0b622a5970037a0556486a996605a5c7586",
+      "exact.py": "7ea21418179ad806cad617b612eb9b031d305e9d345915f54a23349b89c521e3",
+      "greedy.py": "b95b2990ae8f0e02192d678be00cbc7ff5734ed62ed983d7883a8e60bf225c03",
+      "provenance.py": "c7ebe0d08ae8d2084f365df831503eb11af9d15ea61957d30b202dd5bbe26ec1",
+      "quantum.py": "714401b3eb4f01a394e9253e332804e98e48826dc71be9f5dae3a2dafa144468",
+      "scenarios.py": "cb2016d8555fe18fb9bf9a75f2c1ae408286fede6e7d3b21044233fe9266a968",
+      "schema.py": "24d3843ec1b41b93fdd4cf8f5580c3da3c496f27ad9f9b7bae09a760ccbfb518"
+    },
+    "synthetic": true,
+    "execution_environment": "CPU; quantum runs use a noiseless simulator, no quantum hardware"
+  },
+  "scenario": {
+    "id": "flood_baseline",
+    "name": "Synthetic valley flood",
+    "description": "Fictional flood/landslide damage; all six interventions are available.",
+    "budget_default": 9,
+    "actions": [
+      {
+        "id": "bridge_repair",
+        "index": 0,
+        "label": "Repair main bridge",
+        "cost": 4,
+        "enabled": true
+      },
+      {
+        "id": "temporary_crossing",
+        "index": 1,
+        "label": "Establish temporary crossing",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "hospital_road",
+        "index": 2,
+        "label": "Repair hospital access road",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "feeder_repair",
+        "index": 3,
+        "label": "Repair electricity feeder",
+        "cost": 4,
+        "enabled": true
+      },
+      {
+        "id": "hospital_solar",
+        "index": 4,
+        "label": "Install hospital solar-battery backup",
+        "cost": 3,
+        "enabled": true
+      },
+      {
+        "id": "pump_generator",
+        "index": 5,
+        "label": "Deploy pump generator",
+        "cost": 2,
+        "enabled": true
+      }
+    ],
+    "nodes": [
+      {
+        "id": "entry",
+        "label": "Valley entry",
+        "kind": "gateway",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "village_a",
+        "label": "Fictional Village A",
+        "kind": "village",
+        "population": 400,
+        "priority_weight": 1.0
+      },
+      {
+        "id": "village_b",
+        "label": "Fictional Village B",
+        "kind": "village",
+        "population": 250,
+        "priority_weight": 1.2
+      },
+      {
+        "id": "village_c",
+        "label": "Fictional Village C",
+        "kind": "village",
+        "population": 350,
+        "priority_weight": 1.1
+      },
+      {
+        "id": "hospital",
+        "label": "Fictional valley hospital",
+        "kind": "hospital",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "feeder",
+        "label": "Damaged feeder",
+        "kind": "power",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "pump",
+        "label": "Fictional water pump",
+        "kind": "water",
+        "population": null,
+        "priority_weight": null
+      }
+    ],
+    "links": [
+      {
+        "id": "crossing",
+        "source": "entry",
+        "target": "village_a",
+        "lifeline": "road",
+        "action_ids": [
+          "bridge_repair",
+          "temporary_crossing"
+        ],
+        "currently_working": false
+      },
+      {
+        "id": "hospital_route",
+        "source": "village_a",
+        "target": "hospital",
+        "lifeline": "road",
+        "action_ids": [
+          "hospital_road"
+        ],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_hospital",
+        "source": "feeder",
+        "target": "hospital",
+        "lifeline": "electricity",
+        "action_ids": [
+          "feeder_repair"
+        ],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_pump",
+        "source": "feeder",
+        "target": "pump",
+        "lifeline": "electricity",
+        "action_ids": [
+          "feeder_repair"
+        ],
+        "currently_working": false
+      },
+      {
+        "id": "water_b",
+        "source": "pump",
+        "target": "village_b",
+        "lifeline": "water",
+        "action_ids": [
+          "feeder_repair",
+          "pump_generator"
+        ],
+        "currently_working": false
+      },
+      {
+        "id": "water_c",
+        "source": "pump",
+        "target": "village_c",
+        "lifeline": "water",
+        "action_ids": [
+          "feeder_repair",
+          "pump_generator"
+        ],
+        "currently_working": false
+      }
+    ],
+    "synthetic": true
+  },
+  "result": {
+    "scenario_id": "flood_baseline",
+    "algorithm": "qaoa",
+    "budget": 9.0,
+    "status": "ok",
+    "selected_actions": [
+      "temporary_crossing",
+      "hospital_road",
+      "feeder_repair"
+    ],
+    "bitstring": "011100",
+    "feasible": true,
+    "utility": 96.0,
+    "total_cost": 8,
+    "metrics": {
+      "hospital_operational": true,
+      "water_operational": true,
+      "basic_connectivity": true,
+      "hospital_power": true
+    },
+    "diagnostics": {
+      "shots": 512,
+      "seed": 42,
+      "p": 1,
+      "maxiter": 60,
+      "qubits": 6,
+      "depth": 119,
+      "gate_count": 135,
+      "operation_counts": {
+        "u3": 73,
+        "cx": 62,
+        "measure": 6,
+        "barrier": 1
+      },
+      "gate_basis": [
+        "u3",
+        "cx"
+      ],
+      "parameters": {
+        "gamma": [
+          3.1739065045495276
+        ],
+        "beta": [
+          2.803986398525423
+        ]
+      },
+      "initial_parameters": [
+        4.862909272689599,
+        1.378777282143998
+      ],
+      "optimizer": "COBYLA",
+      "optimizer_success": false,
+      "optimizer_message": "Return from COBYLA because the objective function has been evaluated MAXFUN times.",
+      "optimizer_evaluations": 60,
+      "optimizer_trace": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            4.862909272689599,
+            1.378777282143998
+          ],
+          "expected_energy": 123.5981280863671,
+          "scaled_expected_energy": 0.15459428153391758
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            5.362909272689599,
+            1.378777282143998
+          ],
+          "expected_energy": 124.63186852037012,
+          "scaled_expected_energy": 0.15588726519120716
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            4.862909272689599,
+            1.878777282143998
+          ],
+          "expected_energy": 117.23733344882332,
+          "scaled_expected_energy": 0.14663831575837813
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            4.782702824163585,
+            2.3723022821337088
+          ],
+          "expected_energy": 68.83535687732633,
+          "scaled_expected_energy": 0.08609800735125245
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            5.439299732520163,
+            3.126543954236612
+          ],
+          "expected_energy": 97.2635750398951,
+          "scaled_expected_energy": 0.12165550348954984
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            4.350890179578553,
+            2.6243694160018127
+          ],
+          "expected_energy": 25.74764693608946,
+          "scaled_expected_energy": 0.032204686599236344
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            3.8872582690210344,
+            2.811573720206565
+          ],
+          "expected_energy": -4.099334463973975,
+          "scaled_expected_energy": -0.005127372687897404
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            3.3873981338233863,
+            2.799748102244318
+          ],
+          "expected_energy": -8.973747672027628,
+          "scaled_expected_energy": -0.01122419971485632
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            3.3376644900455856,
+            3.2972685185857813
+          ],
+          "expected_energy": 209.25184321050327,
+          "scaled_expected_energy": 0.26172838425328737
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            3.387753799623071,
+            2.549748355240768
+          ],
+          "expected_energy": 23.302707938250975,
+          "scaled_expected_energy": 0.02914660154878171
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            3.3750587090386817,
+            2.924137565608313
+          ],
+          "expected_energy": 3.6977201650920968,
+          "scaled_expected_energy": 0.004625040856900684
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            3.3625202411505875,
+            2.797280217287377
+          ],
+          "expected_energy": -9.084078610807927,
+          "scaled_expected_energy": -0.011362199638283835
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            3.3652872628110475,
+            2.7473568400866055
+          ],
+          "expected_energy": -6.4097567168176,
+          "scaled_expected_energy": -0.008017206650178361
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            3.35352789003367,
+            2.846464946842292
+          ],
+          "expected_energy": -7.951525884180726,
+          "scaled_expected_energy": -0.009945623369832053
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            3.360273796146751,
+            2.772381352155714
+          ],
+          "expected_energy": -8.195179999031042,
+          "scaled_expected_energy": -0.010250381487218314
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            3.359823420280592,
+            2.8094858371895026
+          ],
+          "expected_energy": -9.198290991137522,
+          "scaled_expected_energy": -0.011505054397920603
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            3.3530838535252645,
+            2.8200133364153626
+          ],
+          "expected_energy": -9.116763525350745,
+          "scaled_expected_energy": -0.011403081332521256
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            3.3619289201257643,
+            2.810833750540568
+          ],
+          "expected_energy": -9.18337599159355,
+          "scaled_expected_energy": -0.011486398988859975
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            3.358970393598458,
+            2.804559139971328
+          ],
+          "expected_energy": -9.192118876989856,
+          "scaled_expected_energy": -0.01149733443025623
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            3.355053607522301,
+            2.8109854658938307
+          ],
+          "expected_energy": -9.21806813870392,
+          "scaled_expected_energy": -0.011529791292937986
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            3.3506269422307393,
+            2.8133102528510556
+          ],
+          "expected_energy": -9.224628248295687,
+          "scaled_expected_energy": -0.011537996558218496
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            3.3516251755534174,
+            2.818209592626321
+          ],
+          "expected_energy": -9.156923766262203,
+          "scaled_expected_energy": -0.011453313028470549
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            3.347912208844195,
+            2.8091114169838205
+          ],
+          "expected_energy": -9.26017834053919,
+          "scaled_expected_energy": -0.011582461964401738
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            3.344813766859852,
+            2.8051871772778827
+          ],
+          "expected_energy": -9.27090341324813,
+          "scaled_expected_energy": -0.011595876689491094
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            3.340126331616937,
+            2.8069272780920547
+          ],
+          "expected_energy": -9.299802505486934,
+          "scaled_expected_energy": -0.01163202314632512
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            3.3305410695646596,
+            2.809777322195076
+          ],
+          "expected_energy": -9.342655934626599,
+          "scaled_expected_energy": -0.011685623432928829
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            3.3110225710994934,
+            2.805415187664218
+          ],
+          "expected_energy": -9.435909893404679,
+          "scaled_expected_energy": -0.01180226378161936
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            3.2713405870948855,
+            2.8003812880368883
+          ],
+          "expected_energy": -9.579507313534215,
+          "scaled_expected_energy": -0.011981872812425534
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            3.193682597173698,
+            2.819596818250773
+          ],
+          "expected_energy": -9.613143441608527,
+          "scaled_expected_energy": -0.012023944267177645
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            3.1823032001020697,
+            2.7812495977219496
+          ],
+          "expected_energy": -9.514207514355187,
+          "scaled_expected_energy": -0.011900197016079033
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            3.184095792041492,
+            2.8224416675186803
+          ],
+          "expected_energy": -9.539193737227396,
+          "scaled_expected_energy": -0.011931449327363848
+        },
+        {
+          "evaluation": 32,
+          "parameters": [
+            3.213670830417837,
+            2.820282771440057
+          ],
+          "expected_energy": -9.560352714938379,
+          "scaled_expected_energy": -0.011957914590291906
+        },
+        {
+          "evaluation": 33,
+          "parameters": [
+            3.193181992358905,
+            2.8096093563700246
+          ],
+          "expected_energy": -9.806144922574063,
+          "scaled_expected_energy": -0.01226534699508951
+        },
+        {
+          "evaluation": 34,
+          "parameters": [
+            3.1941811062859466,
+            2.7996593929851277
+          ],
+          "expected_energy": -9.830622394016764,
+          "scaled_expected_energy": -0.012295962969376815
+        },
+        {
+          "evaluation": 35,
+          "parameters": [
+            3.2041793172722373,
+            2.799848541269856
+          ],
+          "expected_energy": -9.804895134655512,
+          "scaled_expected_energy": -0.01226378378318388
+        },
+        {
+          "evaluation": 36,
+          "parameters": [
+            3.190777128810237,
+            2.795997025261255
+          ],
+          "expected_energy": -9.809930852601525,
+          "scaled_expected_energy": -0.012270082367231426
+        },
+        {
+          "evaluation": 37,
+          "parameters": [
+            3.196626758251843,
+            2.799140946785693
+          ],
+          "expected_energy": -9.821205756655491,
+          "scaled_expected_energy": -0.012284184811326444
+        },
+        {
+          "evaluation": 38,
+          "parameters": [
+            3.1943107178358052,
+            2.8002708059766017
+          ],
+          "expected_energy": -9.833252683181742,
+          "scaled_expected_energy": -0.012299252887031573
+        },
+        {
+          "evaluation": 39,
+          "parameters": [
+            3.1936883575296617,
+            2.8013548574741503
+          ],
+          "expected_energy": -9.838600873840955,
+          "scaled_expected_energy": -0.012305942306242596
+        },
+        {
+          "evaluation": 40,
+          "parameters": [
+            3.1932463415398273,
+            2.803815471597643
+          ],
+          "expected_energy": -9.84121537325021,
+          "scaled_expected_energy": -0.012309212474359236
+        },
+        {
+          "evaluation": 41,
+          "parameters": [
+            3.190752682500897,
+            2.803637526107225
+          ],
+          "expected_energy": -9.847231440790859,
+          "scaled_expected_energy": -0.012316737261777184
+        },
+        {
+          "evaluation": 42,
+          "parameters": [
+            3.1883289543284605,
+            2.8042503407171497
+          ],
+          "expected_energy": -9.851628684745402,
+          "scaled_expected_energy": -0.012322237254215636
+        },
+        {
+          "evaluation": 43,
+          "parameters": [
+            3.187053995340649,
+            2.806400801035174
+          ],
+          "expected_energy": -9.845545509310899,
+          "scaled_expected_energy": -0.012314628529469542
+        },
+        {
+          "evaluation": 44,
+          "parameters": [
+            3.1877913392489545,
+            2.8039316009701967
+          ],
+          "expected_energy": -9.853487559909317,
+          "scaled_expected_energy": -0.012324562301324974
+        },
+        {
+          "evaluation": 45,
+          "parameters": [
+            3.1873627937699727,
+            2.802757357054971
+          ],
+          "expected_energy": -9.855516029563082,
+          "scaled_expected_energy": -0.012327099474125181
+        },
+        {
+          "evaluation": 46,
+          "parameters": [
+            3.1861350634412693,
+            2.8025224565654407
+          ],
+          "expected_energy": -9.858266358855484,
+          "scaled_expected_energy": -0.012330539535779218
+        },
+        {
+          "evaluation": 47,
+          "parameters": [
+            3.185006613092562,
+            2.801984776539308
+          ],
+          "expected_energy": -9.860433807042078,
+          "scaled_expected_energy": -0.012333250540390342
+        },
+        {
+          "evaluation": 48,
+          "parameters": [
+            3.182732301089647,
+            2.803022805880607
+          ],
+          "expected_energy": -9.865749891776202,
+          "scaled_expected_energy": -0.012339899802096562
+        },
+        {
+          "evaluation": 49,
+          "parameters": [
+            3.177838409517293,
+            2.8040474156980695
+          ],
+          "expected_energy": -9.874376013881673,
+          "scaled_expected_energy": -0.012350689198100904
+        },
+        {
+          "evaluation": 50,
+          "parameters": [
+            3.1730313929370344,
+            2.812816257787942
+          ],
+          "expected_energy": -9.796190878303625,
+          "scaled_expected_energy": -0.012252896658290963
+        },
+        {
+          "evaluation": 51,
+          "parameters": [
+            3.1761147104948293,
+            2.799353924281229
+          ],
+          "expected_energy": -9.872640033890866,
+          "scaled_expected_energy": -0.01234851786602985
+        },
+        {
+          "evaluation": 52,
+          "parameters": [
+            3.175698094568653,
+            2.8053393336214025
+          ],
+          "expected_energy": -9.87385035325835,
+          "scaled_expected_energy": -0.012350031711392557
+        },
+        {
+          "evaluation": 53,
+          "parameters": [
+            3.178161388998126,
+            2.8045824944352296
+          ],
+          "expected_energy": -9.872129457104847,
+          "scaled_expected_energy": -0.012347879245909753
+        },
+        {
+          "evaluation": 54,
+          "parameters": [
+            3.1772560462768515,
+            2.8029413627806274
+          ],
+          "expected_energy": -9.87743176199156,
+          "scaled_expected_energy": -0.01235451127203447
+        },
+        {
+          "evaluation": 55,
+          "parameters": [
+            3.1767044902712507,
+            2.8018196293128708
+          ],
+          "expected_energy": -9.878505503623838,
+          "scaled_expected_energy": -0.012355854288460085
+        },
+        {
+          "evaluation": 56,
+          "parameters": [
+            3.1771641408109463,
+            2.800657208828985
+          ],
+          "expected_energy": -9.87531319427561,
+          "scaled_expected_energy": -0.0123518614062234
+        },
+        {
+          "evaluation": 57,
+          "parameters": [
+            3.1764720061744733,
+            2.801727699204932
+          ],
+          "expected_energy": -9.878904264348712,
+          "scaled_expected_energy": -0.012356353051092823
+        },
+        {
+          "evaluation": 58,
+          "parameters": [
+            3.1760697533388065,
+            2.8020246716888386
+          ],
+          "expected_energy": -9.880001979207938,
+          "scaled_expected_energy": -0.012357726052792919
+        },
+        {
+          "evaluation": 59,
+          "parameters": [
+            3.175151822336971,
+            2.8024214117496715
+          ],
+          "expected_energy": -9.882007154133458,
+          "scaled_expected_energy": -0.01236023408897243
+        },
+        {
+          "evaluation": 60,
+          "parameters": [
+            3.1739065045495276,
+            2.803986398525423
+          ],
+          "expected_energy": -9.882338351709555,
+          "scaled_expected_energy": -0.012360648344852477
+        }
+      ],
+      "objective_evaluation": "exact Qiskit Statevector expectation; no training shots",
+      "measurement_backend": "Qiskit AerSimulator statevector, final sampled measurements",
+      "measurement_success": true,
+      "energy_penalty": 99.0,
+      "minimum_positive_violation": 1.0,
+      "energy_scale": 799.5,
+      "energy_bitstrings_qiskit_index_order": [
+        "000000",
+        "100000",
+        "010000",
+        "110000",
+        "001000",
+        "101000",
+        "011000",
+        "111000",
+        "000100",
+        "100100",
+        "010100",
+        "110100",
+        "001100",
+        "101100",
+        "011100",
+        "111100",
+        "000010",
+        "100010",
+        "010010",
+        "110010",
+        "001010",
+        "101010",
+        "011010",
+        "111010",
+        "000110",
+        "100110",
+        "010110",
+        "110110",
+        "001110",
+        "101110",
+        "011110",
+        "111110",
+        "000001",
+        "100001",
+        "010001",
+        "110001",
+        "001001",
+        "101001",
+        "011001",
+        "111001",
+        "000101",
+        "100101",
+        "010101",
+        "110101",
+        "001101",
+        "101101",
+        "011101",
+        "111101",
+        "000011",
+        "100011",
+        "010011",
+        "110011",
+        "001011",
+        "101011",
+        "011011",
+        "111011",
+        "000111",
+        "100111",
+        "010111",
+        "110111",
+        "001111",
+        "101111",
+        "011111",
+        "111111"
+      ],
+      "energy_values": [
+        0.0,
+        -13.0,
+        -14.0,
+        87.0,
+        1.0,
+        -12.0,
+        -13.0,
+        88.0,
+        -3.0,
+        -46.0,
+        -47.0,
+        153.0,
+        -2.0,
+        4.0,
+        -96.0,
+        302.0,
+        -3.5,
+        -16.5,
+        -17.5,
+        83.5,
+        -2.5,
+        -65.5,
+        -66.5,
+        232.5,
+        -1.5,
+        153.5,
+        -45.5,
+        451.5,
+        -0.5,
+        302.5,
+        103.5,
+        600.5,
+        1.0,
+        -42.0,
+        -43.0,
+        58.0,
+        2.0,
+        -41.0,
+        -42.0,
+        158.0,
+        -2.0,
+        54.0,
+        -46.0,
+        352.0,
+        -1.0,
+        203.0,
+        4.0,
+        501.0,
+        -2.5,
+        -45.5,
+        -46.5,
+        252.5,
+        -1.5,
+        103.5,
+        -95.5,
+        401.5,
+        -0.5,
+        352.5,
+        153.5,
+        650.5,
+        198.5,
+        501.5,
+        302.5,
+        799.5
+      ],
+      "expected_energy": -9.882338351709555,
+      "compiled_qasm2": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[6];\ncreg meas[6];\nu3(pi/2,-0.5965067939917899,-pi) q[0];\nu3(pi/2,0,pi) q[1];\ncx q[1],q[0];\nu3(0,0,0.2960376900979908) q[0];\nu3(pi/2,0,pi) q[2];\ncx q[2],q[0];\nu3(0,0,0.14685029541021016) q[0];\ncx q[1],q[0];\nu3(0,0,-0.04934050364285836) q[0];\nu3(pi/2,0,pi) q[3];\ncx q[3],q[0];\nu3(0,0,0.1964735991086081) q[0];\ncx q[1],q[0];\nu3(0,0,-0.24535255325152996) q[0];\ncx q[2],q[0];\nu3(0,0,0.1567749561498898) q[0];\ncx q[1],q[0];\nu3(0,0,0.20621951040389058) q[0];\nu3(pi/2,0,pi) q[4];\ncx q[4],q[0];\nu3(0,0,0.12253487659799531) q[0];\ncx q[1],q[0];\nu3(0,0,-0.3192912757621428) q[0];\ncx q[2],q[0];\nu3(0,0,0.24560066977002196) q[0];\ncx q[1],q[0];\nu3(0,0,-0.2944796239129439) q[0];\ncx q[3],q[0];\nu3(0,0,0.19647359910860807) q[0];\ncx q[1],q[0];\nu3(0,0,-0.19622548259011607) q[0];\ncx q[2],q[0];\nu3(0,0,0.1716619472594091) q[0];\ncx q[1],q[0];\nu3(0,0,0.07372528952916833) q[0];\nu3(pi/2,0,pi) q[5];\ncx q[5],q[0];\nu3(0,0,0.18406777318400863) q[0];\ncx q[1],q[0];\nu3(0,0,-0.2086313085147155) q[0];\ncx q[2],q[0];\nu3(0,0,0.1840677731840086) q[0];\ncx q[1],q[0];\nu3(0,0,-0.20863130851471554) q[0];\ncx q[3],q[0];\nu3(0,0,0.2331948438454225) q[0];\ncx q[1],q[0];\nu3(0,0,-0.11037716719188774) q[0];\ncx q[2],q[0];\nu3(0,0,0.2331948438454225) q[0];\ncx q[1],q[0];\nu3(0,0,-0.30688544983754334) q[0];\ncx q[4],q[0];\nu3(0,0,0.16918078207448925) q[0];\ncx q[1],q[0];\nu3(0,0,-0.2726453702856487) q[0];\ncx q[2],q[0];\nu3(0,0,0.18406777318400858) q[0];\ncx q[1],q[0];\nu3(0,0,-0.2577583791761294) q[0];\ncx q[3],q[0];\nu3(0,0,0.18406777318400863) q[0];\ncx q[1],q[0];\nu3(0,0,-0.20863130851471556) q[0];\ncx q[2],q[0];\nu3(0,0,0.16918078207448925) q[0];\ncx q[1],q[0];\nu3(0,0,-0.027010016978579382) q[0];\nu3(0,0,-0.24864743506602077) q[1];\ncx q[2],q[1];\nu3(0,0,-0.1475946449656862) q[1];\ncx q[3],q[1];\nu3(0,0,0.19647359910860807) q[1];\ncx q[2],q[1];\nu3(0,0,-0.039415842903178844) q[1];\ncx q[4],q[1];\nu3(0,0,0.17166194725940914) q[1];\ncx q[2],q[1];\nu3(0,0,-0.19622548259011607) q[1];\ncx q[3],q[1];\nu3(0,0,0.1964735991086081) q[1];\ncx q[2],q[1];\nu3(0,0,-0.07365592245507338) q[1];\ncx q[5],q[0];\nu3(5.607972797050846,-pi/2,pi/2) q[0];\ncx q[5],q[1];\nu3(0,0,0.1840677731840086) q[1];\ncx q[2],q[1];\nu3(0,0,-0.2577583791761295) q[1];\ncx q[3],q[1];\nu3(0,0,0.18406777318400858) q[1];\ncx q[2],q[1];\nu3(0,0,-0.2086313085147155) q[1];\ncx q[4],q[1];\nu3(0,0,0.16918078207448925) q[1];\ncx q[2],q[1];\nu3(0,0,-0.20863130851471554) q[1];\ncx q[3],q[1];\nu3(0,0,0.23319484384542252) q[1];\ncx q[2],q[1];\nu3(0,0,-0.1252641583014071) q[1];\nu3(0,0,-0.05213915242036524) q[2];\ncx q[3],q[2];\nu3(0,0,-0.049340503642858385) q[2];\ncx q[4],q[2];\nu3(0,0,0.1468502954102102) q[2];\ncx q[3],q[2];\nu3(0,0,-0.09846757430427229) q[2];\ncx q[5],q[1];\nu3(5.607972797050846,-pi/2,pi/2) q[1];\ncx q[5],q[2];\nu3(0,0,0.1840677731840086) q[2];\ncx q[3],q[2];\nu3(0,0,-0.20863130851471554) q[2];\ncx q[4],q[2];\nu3(0,0,0.18406777318400855) q[2];\ncx q[3],q[2];\nu3(0,0,-0.11037716719188775) q[2];\nu3(0,0,-0.4198478328254934) q[3];\ncx q[4],q[3];\nu3(0,0,0.13327325396724574) q[3];\ncx q[5],q[2];\nu3(5.607972797050846,-pi/2,pi/2) q[2];\ncx q[5],q[3];\nu3(0,0,0.18406777318400866) q[3];\ncx q[4],q[3];\nu3(0,0,0.03253794745949809) q[3];\nu3(0,0,-0.26601559136046005) q[4];\ncx q[5],q[3];\nu3(5.607972797050846,-pi/2,pi/2) q[3];\ncx q[5],q[4];\nu3(0,0,-0.06125009653047386) q[4];\ncx q[5],q[4];\nu3(5.607972797050846,-pi/2,pi/2) q[4];\nu3(0.6752125101287405,pi/2,-1.6899269392080987) q[5];\nbarrier q[0],q[1],q[2],q[3],q[4],q[5];\nmeasure q[0] -> meas[0];\nmeasure q[1] -> meas[1];\nmeasure q[2] -> meas[2];\nmeasure q[3] -> meas[3];\nmeasure q[4] -> meas[4];\nmeasure q[5] -> meas[5];",
+      "logical_circuit": "        ┌───┐»\n   q_0: ┤ H ├»\n        ├───┤»\n   q_1: ┤ H ├»\n        ├───┤»\n   q_2: ┤ H ├»\n        ├───┤»\n   q_3: ┤ H ├»\n        ├───┤»\n   q_4: ┤ H ├»\n        ├───┤»\n   q_5: ┤ H ├»\n        └───┘»\nmeas: 6/═════»\n             »\n«        ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐»\n«   q_0: ┤0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ├»\n«        │                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  │»\n«   q_1: ┤1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ├»\n«        │                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  │»\n«   q_2: ┤2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ├»\n«        │  Diagonal(1,0.99867+0.051585j,0.99846+0.055549j,0.94095-0.33855j,0.99999-0.0039699j,0.99887+0.04762j,0.99867+0.051585j,0.9396-0.34229j,0.99993+0.011909j,0.98337+0.1816j,0.98264+0.1855j,0.82114-0.57073j,0.99997+0.0079396j,0.99987-0.015879j,0.92825+0.37195j,0.36338-0.93164j,0.9999+0.013894j,0.99786+0.065456j,0.99759+0.069417j,0.94556-0.32545j,0.99995+0.0099245j,0.96638+0.25711j,0.96535+0.26094j,0.60344-0.79741j,0.99998+0.0059548j,0.82001-0.57235j,0.98373+0.17965j,-0.21979-0.97555j,1+0.0019849j,0.36153-0.93236j,0.91677-0.39942j,-0.72643-0.68724j,0.99999-0.0039699j,0.98613+0.16596j,0.98547+0.16988j,0.97361-0.22822j,0.99997-0.0079396j,0.98678+0.16205j,0.98613+0.16596j,0.80965-0.58691j,0.99997+0.0079396j,0.97711-0.21273j,0.98337+0.1816j,0.17254-0.985j,0.99999+0.0039699j,0.69247-0.72144j,0.99987-0.015879j,-0.40603-0.91386j,0.99995+0.0099245j,0.98373+0.17965j,0.98301+0.18355j,0.53829-0.84276j,0.99998+0.0059548j,0.91677-0.39942j,0.92899+0.3701j,-0.023102-0.99973j,1+0.0019849j,0.17058-0.98534j,0.82001-0.57235j,-0.84768-0.5305j,0.70525-0.70896j,-0.40784-0.91305j,0.36153-0.93236j,-0.99948+0.032308j) │»\n«   q_3: ┤3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ├»\n«        │                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  │»\n«   q_4: ┤4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ├»\n«        │                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  │»\n«   q_5: ┤5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ├»\n«        └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘»\n«meas: 6/════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════»\n«                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            »\n«        ┌───────────┐ ░ ┌─┐               \n«   q_0: ┤ Rx(5.608) ├─░─┤M├───────────────\n«        ├───────────┤ ░ └╥┘┌─┐            \n«   q_1: ┤ Rx(5.608) ├─░──╫─┤M├────────────\n«        ├───────────┤ ░  ║ └╥┘┌─┐         \n«   q_2: ┤ Rx(5.608) ├─░──╫──╫─┤M├─────────\n«        ├───────────┤ ░  ║  ║ └╥┘┌─┐      \n«   q_3: ┤ Rx(5.608) ├─░──╫──╫──╫─┤M├──────\n«        ├───────────┤ ░  ║  ║  ║ └╥┘┌─┐   \n«   q_4: ┤ Rx(5.608) ├─░──╫──╫──╫──╫─┤M├───\n«        ├───────────┤ ░  ║  ║  ║  ║ └╥┘┌─┐\n«   q_5: ┤ Rx(5.608) ├─░──╫──╫──╫──╫──╫─┤M├\n«        └───────────┘ ░  ║  ║  ║  ║  ║ └╥┘\n«meas: 6/═════════════════╩══╩══╩══╩══╩══╩═\n«                         0  1  2  3  4  5 ",
+      "raw_qiskit_counts": {
+        "000000": 2,
+        "000001": 10,
+        "000010": 11,
+        "000011": 12,
+        "000100": 9,
+        "000101": 25,
+        "000110": 16,
+        "000111": 7,
+        "001000": 15,
+        "001001": 17,
+        "001010": 7,
+        "001011": 3,
+        "001100": 13,
+        "001101": 7,
+        "001110": 11,
+        "010000": 16,
+        "010001": 21,
+        "010010": 23,
+        "010011": 4,
+        "010100": 20,
+        "010101": 14,
+        "010110": 10,
+        "011000": 16,
+        "011001": 1,
+        "011010": 7,
+        "011100": 8,
+        "011110": 3,
+        "011111": 1,
+        "100000": 10,
+        "100001": 27,
+        "100010": 17,
+        "100011": 5,
+        "100100": 10,
+        "100101": 13,
+        "100110": 16,
+        "100111": 2,
+        "101000": 14,
+        "101001": 4,
+        "101010": 11,
+        "101011": 1,
+        "101100": 7,
+        "101101": 3,
+        "101110": 2,
+        "101111": 1,
+        "110000": 10,
+        "110001": 12,
+        "110010": 11,
+        "110100": 11,
+        "110101": 3,
+        "110110": 6,
+        "111000": 2,
+        "111010": 1,
+        "111011": 1,
+        "111100": 2,
+        "111111": 1
+      },
+      "distribution": [
+        {
+          "bitstring": "000000",
+          "count": 2,
+          "probability": 0.00390625
+        },
+        {
+          "bitstring": "000001",
+          "count": 10,
+          "probability": 0.01953125
+        },
+        {
+          "bitstring": "000010",
+          "count": 16,
+          "probability": 0.03125
+        },
+        {
+          "bitstring": "000011",
+          "count": 10,
+          "probability": 0.01953125
+        },
+        {
+          "bitstring": "000100",
+          "count": 15,
+          "probability": 0.029296875
+        },
+        {
+          "bitstring": "000101",
+          "count": 14,
+          "probability": 0.02734375
+        },
+        {
+          "bitstring": "000110",
+          "count": 16,
+          "probability": 0.03125
+        },
+        {
+          "bitstring": "000111",
+          "count": 2,
+          "probability": 0.00390625
+        },
+        {
+          "bitstring": "001000",
+          "count": 9,
+          "probability": 0.017578125
+        },
+        {
+          "bitstring": "001001",
+          "count": 10,
+          "probability": 0.01953125
+        },
+        {
+          "bitstring": "001010",
+          "count": 20,
+          "probability": 0.0390625
+        },
+        {
+          "bitstring": "001011",
+          "count": 11,
+          "probability": 0.021484375
+        },
+        {
+          "bitstring": "001100",
+          "count": 13,
+          "probability": 0.025390625
+        },
+        {
+          "bitstring": "001101",
+          "count": 7,
+          "probability": 0.013671875
+        },
+        {
+          "bitstring": "001110",
+          "count": 8,
+          "probability": 0.015625
+        },
+        {
+          "bitstring": "001111",
+          "count": 2,
+          "probability": 0.00390625
+        },
+        {
+          "bitstring": "010000",
+          "count": 11,
+          "probability": 0.021484375
+        },
+        {
+          "bitstring": "010001",
+          "count": 17,
+          "probability": 0.033203125
+        },
+        {
+          "bitstring": "010010",
+          "count": 23,
+          "probability": 0.044921875
+        },
+        {
+          "bitstring": "010011",
+          "count": 11,
+          "probability": 0.021484375
+        },
+        {
+          "bitstring": "010100",
+          "count": 7,
+          "probability": 0.013671875
+        },
+        {
+          "bitstring": "010101",
+          "count": 11,
+          "probability": 0.021484375
+        },
+        {
+          "bitstring": "010110",
+          "count": 7,
+          "probability": 0.013671875
+        },
+        {
+          "bitstring": "010111",
+          "count": 1,
+          "probability": 0.001953125
+        },
+        {
+          "bitstring": "011000",
+          "count": 16,
+          "probability": 0.03125
+        },
+        {
+          "bitstring": "011001",
+          "count": 16,
+          "probability": 0.03125
+        },
+        {
+          "bitstring": "011010",
+          "count": 10,
+          "probability": 0.01953125
+        },
+        {
+          "bitstring": "011011",
+          "count": 6,
+          "probability": 0.01171875
+        },
+        {
+          "bitstring": "011100",
+          "count": 11,
+          "probability": 0.021484375
+        },
+        {
+          "bitstring": "011101",
+          "count": 2,
+          "probability": 0.00390625
+        },
+        {
+          "bitstring": "011110",
+          "count": 3,
+          "probability": 0.005859375
+        },
+        {
+          "bitstring": "100000",
+          "count": 10,
+          "probability": 0.01953125
+        },
+        {
+          "bitstring": "100001",
+          "count": 27,
+          "probability": 0.052734375
+        },
+        {
+          "bitstring": "100010",
+          "count": 21,
+          "probability": 0.041015625
+        },
+        {
+          "bitstring": "100011",
+          "count": 12,
+          "probability": 0.0234375
+        },
+        {
+          "bitstring": "100100",
+          "count": 17,
+          "probability": 0.033203125
+        },
+        {
+          "bitstring": "100101",
+          "count": 4,
+          "probability": 0.0078125
+        },
+        {
+          "bitstring": "100110",
+          "count": 1,
+          "probability": 0.001953125
+        },
+        {
+          "bitstring": "101000",
+          "count": 25,
+          "probability": 0.048828125
+        },
+        {
+          "bitstring": "101001",
+          "count": 13,
+          "probability": 0.025390625
+        },
+        {
+          "bitstring": "101010",
+          "count": 14,
+          "probability": 0.02734375
+        },
+        {
+          "bitstring": "101011",
+          "count": 3,
+          "probability": 0.005859375
+        },
+        {
+          "bitstring": "101100",
+          "count": 7,
+          "probability": 0.013671875
+        },
+        {
+          "bitstring": "101101",
+          "count": 3,
+          "probability": 0.005859375
+        },
+        {
+          "bitstring": "110000",
+          "count": 12,
+          "probability": 0.0234375
+        },
+        {
+          "bitstring": "110001",
+          "count": 5,
+          "probability": 0.009765625
+        },
+        {
+          "bitstring": "110010",
+          "count": 4,
+          "probability": 0.0078125
+        },
+        {
+          "bitstring": "110100",
+          "count": 3,
+          "probability": 0.005859375
+        },
+        {
+          "bitstring": "110101",
+          "count": 1,
+          "probability": 0.001953125
+        },
+        {
+          "bitstring": "110111",
+          "count": 1,
+          "probability": 0.001953125
+        },
+        {
+          "bitstring": "111000",
+          "count": 7,
+          "probability": 0.013671875
+        },
+        {
+          "bitstring": "111001",
+          "count": 2,
+          "probability": 0.00390625
+        },
+        {
+          "bitstring": "111101",
+          "count": 1,
+          "probability": 0.001953125
+        },
+        {
+          "bitstring": "111110",
+          "count": 1,
+          "probability": 0.001953125
+        },
+        {
+          "bitstring": "111111",
+          "count": 1,
+          "probability": 0.001953125
+        }
+      ],
+      "feasible_sample_rate": 0.875,
+      "exact_optimum": 96.0,
+      "optimality_gap": 0.0,
+      "gap_definition": "exact utility minus best feasible observed utility (absolute service-score units)",
+      "runtime_ms": 408.64289999990433
+    },
+    "warnings": [
+      "Synthetic six-action demonstration on a noiseless simulator; no quantum advantage claim.",
+      "Hamiltonian construction enumerates all 64 states and scales exponentially.",
+      "Single seeded optimizer start; best observed sample is not an expected-performance guarantee.",
+      "Optimizer did not report convergence: Return from COBYLA because the objective function has been evaluated MAXFUN times."
+    ]
+  }
+}
