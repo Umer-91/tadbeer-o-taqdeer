@@ -21,3 +21,19 @@ The user's follow-up requires **تدبیر و تقدیر** as the main hero head
 ## Access and release
 
 The supplied repository initially existed as public and empty. Private visibility was subsequently observed in GitHub settings before upload. Git CLI access is independent of connector access; verify the actual transport used. Publishing or submission requires explicit approval. Deadline is 2026-11-12T18:59:00Z; no commits or pushes at/after cutoff.
+
+## Phase 1 implementation decisions — 2026-11-12
+
+- User approved public visibility; GitHub settings subsequently confirmed public. User separately authorized Phase 1. Phases 2 and 3 remain gated.
+- Use the explicitly permitted diagonal six-qubit Hamiltonian, with all 64 energy values and primitive gate synthesis recorded. Do not call this a quadratic QUBO or scalable encoding.
+- Normalize energies by a positive scale for QAOA phases/optimization; record that scale. It preserves minima.
+- For real-valued budgets, choose a penalty from both the utility spread and minimum positive violation. A spread-only bound fails when cost overflow is fractional. The proof and tests are in MODEL.md and test_model.py.
+- Keep costs positive integer planning units; budgets may be finite nonnegative real numbers. No rounding tolerances silently expand feasibility.
+- Pin the observed Python 3.12.14 environment and installed packages; NumPy/SciPy require Python >=3.12, so the project minimum reflects that.
+- Local Windows policy blocks the Qiskit native extension. No security settings changed. The user declined GitHub Actions validation and will provide an approved local environment. Removed the unexecuted CI draft. No Phase 1 commit or push until local quantum validation succeeds; no verified-core claim yet.
+
+### Local environment resolution and circuit export
+
+The user subsequently authorized discovery and use of their installed Python. The launcher was outside PATH; its full path listed Python 3.12.10. A new root `.venv` was created without modifying the installed interpreter or the earlier backend environment. Qiskit/Aer imports, a measured one-qubit smoke circuit, and all 86 tests passed there. Security settings were unchanged; no cloud validation was used.
+
+The first complete test run caught a strict OpenQASM reader rejection of the `sx` gate in exported evidence. Transpile production circuits to standard `u3,cx` instead; a test now checks exported/reloaded circuit statevector equivalence, not merely parsing. All recorded quantum results use this corrected source and include matching source hashes.

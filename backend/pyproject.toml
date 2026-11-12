@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tadbeer-o-taqdeer"
+version = "0.1.0"
+description = "Reproducible synthetic lifeline restoration with six-qubit Qiskit QAOA"
+requires-python = ">=3.12"
+dependencies = [
+    "qiskit==2.6.2",
+    "qiskit-aer==0.18.2",
+    "numpy==2.5.4",
+    "scipy==1.18.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.2.0"]
+
+[tool.setuptools.packages.find]
+include = ["raasta*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = ["slow: full optimizer/benchmark checks, excluded from routine smoke tests"]
