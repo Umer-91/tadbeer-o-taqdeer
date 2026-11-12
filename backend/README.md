@@ -39,7 +39,7 @@ Use a new output filename for each run: measured outputs are never silently over
 
 ## Local execution status
 
-**86 tests passed** in the user's Python 3.12.10 environment. The acceptance QAOA run and nine benchmark cases executed locally with real measurement counts. See [PROGRESS.md](../docs/PROGRESS.md) and the recorded JSON in `experiments/results/`. Default flood/budget 9: best observed `011100`, utility 96, 87.5% feasible samples, 512 shots, zero absolute gap to exact. This is a single seeded, noiseless, six-qubit simulator result, not evidence of quantum advantage.
+**86 tests passed** in the user's Python 3.12.10 environment. The acceptance QAOA run and nine benchmark cases executed locally with real measurement counts. See `docs/MODEL.md` and the recorded JSON in `experiments/results/`. Default flood/budget 9: best observed `011100`, utility 96, 87.5% feasible samples, 512 shots, zero absolute gap to exact. This is a single seeded, noiseless, six-qubit simulator result, not evidence of quantum advantage.
 
 The earlier Codex-bundled Python environment was blocked by Windows Application Control. Using the user's installed Python resolved execution without modifying security settings. No cloud validation was used.
 
