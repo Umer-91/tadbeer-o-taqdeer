@@ -136,3 +136,11 @@ Created AGENTS.md, CODEX_HANDOFF.md, architecture/dependency PNGs, report.docx w
 - Report renderer failed because bundled LibreOffice soffice.exe is unavailable. Word layout and final page count require manual inspection. Local HTTP smoke attempt could not connect to ports 8000 or 3000: servers were not running. Earlier user-provided browser outputs remain separate evidence.
 - Fetched origin/main at 80fe084; its tree matches this branch's pre-documentation HEAD 53e3bb9e99265175b1270045ab90c22bf041bcca. Preserved existing uncommitted backend/raasta/api.py and backend/tests/test_api.py; they are not part of this documentation commit.
 - Remaining user tasks: inspect Word report, record/upload video with link access, and submit the form. No form submitted. Commit and remote verification for this documentation update are reported in chat; no commit or push permitted at/after 18:59 UTC.
+
+## Final repository closeout — 12 November 2026
+
+- User confirmed the Word report is good after their review. Automated report rendering remains unavailable; this is user confirmation, not an automated visual check.
+- Full existing backend suite passed: 124 tests in 2.52 seconds, including real Qiskit/API tests and the pending timeout/capacity, missing-Qiskit and no-feasible-sample tests. One upstream Starlette/httpx deprecation warning; no test failures. No nine-case benchmark rerun.
+- Finalized the existing API capacity changes: two concurrent workers maximum; a timed-out request retains its slot until computation finishes. No scientific solver changes.
+- GitHub main already contains the final README/report via merged PR #4 (e181be9). Backend hardening is delivered separately through the development branch and a normal PR merge.
+- Remaining submission actions belong to the team: record/upload the video with accessible link and submit the form. No form submitted by the agent.
