@@ -44,3 +44,52 @@ def test_failure_never_substitutes(monkeypatch):
     response = client.post('/api/optimize', json=dict(scenario_id='flood_baseline', budget=9, algorithm='qaoa'))
     assert response.status_code == 500
     assert 'utility' not in response.json()
+
+def test_timeout_retains_capacity_until_worker_finishes(monkeypatch):
+    import asyncio
+    import threading
+    from raasta import api
+    entered = threading.Event()
+    finish = threading.Event()
+    capacity = threading.BoundedSemaphore(1)
+    monkeypatch.setattr(api, '_capacity', capacity)
+    monkeypatch.setattr(api, 'COMPUTE_TIMEOUT_SECONDS', 0.02)
+    def slow(_):
+        entered.set()
+        finish.wait(2)
+        return {}
+    monkeypatch.setattr(api, 'compute', slow)
+    request = api.OptimizeRequest(scenario_id='flood_baseline', budget=9, algorithm='exact')
+    async def exercise():
+        try:
+            with pytest.raises(api.HTTPException) as timeout:
+                await api.optimize(request)
+            assert entered.is_set() and timeout.value.status_code == 504
+            with pytest.raises(api.HTTPException) as busy:
+                await api.optimize(request)
+            assert busy.value.status_code == 503
+        finally:
+            finish.set()
+    asyncio.run(exercise())
+    assert capacity.acquire(blocking=False)
+    capacity.release()
+
+def test_missing_quantum_returns_503(monkeypatch):
+    from raasta import api
+    def unavailable(_):
+        raise ImportError('test unavailable')
+    monkeypatch.setattr(api.importlib, 'import_module', unavailable)
+    response = client.post('/api/optimize', json=dict(scenario_id='flood_baseline', budget=9, algorithm='qaoa'))
+    assert response.status_code == 503
+    assert 'utility' not in response.json()
+
+def test_no_feasible_sample_preserves_empty_result(monkeypatch):
+    from raasta.quantum import result_from_counts
+    result = result_from_counts({'111111': 8}, get_scenario('flood_baseline'), 9, {'runtime_ms': 1, 'shots': 8, 'exact_optimum': 96})
+    monkeypatch.setattr('raasta.api.compute', lambda _: result.to_dict())
+    response = client.post('/api/optimize', json=dict(scenario_id='flood_baseline', budget=9, algorithm='qaoa'))
+    assert response.status_code == 200
+    data = response.json()
+    assert data['status'] == 'no_feasible_sample'
+    assert data['bitstring'] is None and data['utility'] is None
+    assert data['selected_actions'] == []

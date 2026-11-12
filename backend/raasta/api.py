@@ -3,6 +3,7 @@ import asyncio
 import importlib
 import logging
 import os
+import threading
 from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException
@@ -40,7 +41,20 @@ class OptimizeResponse(BaseModel):
 
 
 app = FastAPI(title="Tadbeer-o-Taqdeer", version="0.3.0")
-origins = os.getenv("CORS_ORIGINS", "http://127.0.0.1:3000,http://localhost:3000").split(",")
+COMPUTE_TIMEOUT_SECONDS = 25
+_capacity = threading.BoundedSemaphore(2)
+
+
+def admitted_compute(request: OptimizeRequest):
+    # The slot belongs to the actual worker, not the HTTP waiter. A timeout
+    # cannot free capacity while the solver is still consuming CPU.
+    try:
+        return compute(request)
+    finally:
+        _capacity.release()
+
+
+origins = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "http://127.0.0.1:3000,http://localhost:3000").split(",") if origin.strip()]
 if "*" in origins:
     raise ValueError("Explicit frontend origins are required")
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
@@ -80,9 +94,18 @@ async def optimize(request: OptimizeRequest):
         get_scenario(request.scenario_id)
     except (KeyError, ValueError) as exc:
         raise HTTPException(422, "Unknown synthetic scenario") from exc
+    if not _capacity.acquire(blocking=False):
+        raise HTTPException(503, "Computation capacity busy; retry after the current runs finish", headers={"Retry-After": "2"})
+    loop = asyncio.get_running_loop()
     try:
-        # The worker remains bounded to 60 optimizer evaluations after HTTP timeout.
-        return await asyncio.wait_for(asyncio.to_thread(compute, request), timeout=25)
+        worker = loop.run_in_executor(None, admitted_compute, request)
+    except Exception:
+        _capacity.release()
+        raise
+    # Retrieve late failures even when the HTTP caller has already timed out.
+    worker.add_done_callback(lambda task: task.exception() if not task.cancelled() else None)
+    try:
+        return await asyncio.wait_for(asyncio.shield(worker), timeout=COMPUTE_TIMEOUT_SECONDS)
     except TimeoutError as exc:
         raise HTTPException(504, "Computation exceeded 25 seconds; no result returned") from exc
     except HTTPException:
