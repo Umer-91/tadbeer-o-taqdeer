@@ -64,7 +64,7 @@ QAOA selects only from measured feasible samples. Exact is used as a reference, 
 | `docs/architecture.png` | Application architecture diagram |
 | `docs/dependencies.png` | Infrastructure service dependency diagram |
 | `docs/MODEL.md` | Detailed model and energy explanation |
-| `scripts/build_report.py` | Rebuilds the report from saved results, without rerunning QAOA |
+| `scripts/build_report.py` | Original report generator; running it overwrites the manually updated final report. Not needed to run the app. |
 | `backend/requirements.lock.txt`, `frontend/package-lock.json` | Pinned dependencies |
 
 The original specifications remain in `MASTER_PLAN.md` and `PHASE_1_QUANTUM.md` through `PHASE_3_INTEGRATION.md`. Historical progress is in `docs/PROGRESS.md`; it is not the current setup guide. The internal Python package name remains `raasta` for compatibility.
@@ -124,6 +124,12 @@ node C:\Hackathon\.tools\npm\package\bin\npm-cli.js run start
 ```
 
 Replace `start` with `build`, `test` or `ci` when needed. `.tools` is local tooling and is not distributed in Git. The full fresh-machine installation above is provided for reproduction; it is not a claim that it was tested on a second physical machine.
+
+## Optional API configuration
+
+Default local addresses need no configuration. If the backend address changes, copy `frontend/.env.example` to `frontend/.env.local`, set `NEXT_PUBLIC_API_BASE_URL`, and rebuild the frontend. This value is public browser configuration, not a secret.
+
+The backend permits `http://127.0.0.1:3000` and `http://localhost:3000` by default. For another frontend origin, set `$env:CORS_ORIGINS` to a comma-separated list of explicit origins before starting the backend. Stop either foreground server with **Ctrl+C**. No IBM account or quantum hardware credentials are required for simulator execution.
 
 ## Tests and experiments
 
