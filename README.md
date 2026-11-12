@@ -8,7 +8,7 @@ This is a reproducible research prototype using a fictional, Pakistan-inspired v
 
 ## Current status
 
-Phase 1 core is locally verified on `phase-1-quantum`: **86 tests pass**, including real Qiskit/Aer execution, all-state energy equivalence, bit ordering, seeded reproducibility, and circuit export replay. The acceptance run and all nine synthetic scenario/budget experiments are recorded. The API and frontend remain unimplemented. See [progress and push status](docs/PROGRESS.md), [backend setup](backend/README.md), and [decisions](docs/DECISIONS.md).
+Phase 1 core is verified on `phase-1-quantum`: **86 tests pass**, including real Qiskit/Aer execution, all-state energy equivalence, bit ordering, seeded reproducibility, and circuit export replay. The acceptance run and all nine synthetic scenario/budget experiments are recorded. Phase 2 adds the Urdu cinematic 3D frontend and typed dashboard on `phase-2-frontend`: **11 client tests pass**, with lint/typecheck/build and responsive browser checks. The HTTP API and end-to-end integration remain Phase 3 work. See [progress and push status](docs/PROGRESS.md), [frontend setup](frontend/README.md), [visual QA](docs/FRONTEND_QA.md), and [backend setup](backend/README.md).
 
 Default flood/budget 9, seed 42, p=1, 512 shots: QAOA sampled `011100` with utility 96 and 87.5% feasible shots. This best observed score matches exact; the optimizer hit its 60-evaluation cap without convergence. These are small noiseless simulator results, not evidence of quantum advantage.
 
@@ -42,7 +42,7 @@ docs/assets/           Architecture and report assets
 
 ## Clone and inspect
 
-An authorized GitHub account is required while the repository is private. Authenticate through your Git credential manager's browser flow; never paste credentials into files or remote URLs.
+The repository is public with user approval. Reading/cloning needs no account; pushes require authorized GitHub access. Authenticate through your Git credential manager's browser flow; never paste credentials into files or remote URLs.
 
 ```sh
 git clone https://github.com/Umer-91/tadbeer-o-taqdeer.git
@@ -54,7 +54,7 @@ git ls-remote origin refs/heads/main
 git diff --check
 ```
 
-Compare the local HEAD with the remote main hash. For the implemented core, switch to `phase-1-quantum` and follow [backend setup](backend/README.md), comparing that branch's local and remote hashes. The pinned numerical stack requires Python 3.12+; quantum validation used the user's Python 3.12.10 and a repository-root virtual environment. Frontend dependencies and execution commands remain deferred to Phase 2.
+Compare the local HEAD with the corresponding remote branch hash. For the frontend and core together, switch to `phase-2-frontend` and follow [frontend setup](frontend/README.md). The pinned numerical stack requires Python 3.12+; quantum validation used the user's Python 3.12.10 and a repository-root virtual environment. Frontend validation used Node 24.22.1 and the committed npm lockfile.
 
 ## Development workflow
 
