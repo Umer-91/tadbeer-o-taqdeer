@@ -63,3 +63,13 @@ This mode does not claim or substitute quantum results. The full-quantum and cla
 - `provenance.py`: actual environment, time, package versions, and source hashes.
 
 No runtime advantage is claimed. Construction and exact statevector simulation both scale exponentially. See the model document for scientific limitations and API sources.
+
+## Phase 3 local API
+
+From the repository root, after installing the lockfile and editable backend:
+
+```powershell
+.venv/Scripts/python.exe -m uvicorn raasta.api:app --host 127.0.0.1 --port 8000
+```
+
+Swagger: http://127.0.0.1:8000/docs . Health: /api/health . Scenarios: /api/scenarios . POST /api/optimize accepts scenario_id, budget, algorithm, seed, shots and p. Default CORS permits localhost:3000 and 127.0.0.1:3000; override with comma-separated CORS_ORIGINS. No credentials required. API calls use the unchanged Phase 1 solvers. Timeout is 25 seconds; a worker can continue its bounded evaluations after an HTTP timeout.

@@ -19,14 +19,14 @@ import {
   Square,
   Zap,
 } from "lucide-react";
-import { createApi, parseScenarios } from "@/lib/api";
+import { createApi } from "@/lib/api";
 import type { Algorithm, Scenario, SolverResult } from "@/lib/types";
-import fixtures from "@/lib/scenarios.preview.json";
+
 import NetworkView from "./NetworkView";
 import AlgorithmComparison from "./AlgorithmComparison";
 import QuantumEvidence from "./QuantumEvidence";
 
-const preview = parseScenarios(fixtures);
+
 const api = createApi();
 const algorithms: { id: Algorithm; name: string; description: string }[] = [
   { id: "qaoa", name: "QAOA", description: "Sample a six-qubit circuit" },
@@ -39,10 +39,10 @@ const algorithms: { id: Algorithm; name: string; description: string }[] = [
 ];
 
 export default function CommandCenter() {
-  const [scenarios, setScenarios] = useState<Scenario[]>(preview),
+  const [scenarios, setScenarios] = useState<Scenario[]>([]),
     [connected, setConnected] = useState(false),
     [connecting, setConnecting] = useState(true);
-  const [scenarioId, setScenarioId] = useState(preview[0].id),
+  const [scenarioId, setScenarioId] = useState(""),
     [budget, setBudget] = useState(9),
     [algorithm, setAlgorithm] = useState<Algorithm>("qaoa");
   const [results, setResults] = useState<
@@ -134,6 +134,7 @@ export default function CommandCenter() {
       if (active.current === controller) setBusy(false);
     }
   }
+  if (!scenario) return <section id="command-center" className="command-section section-pad"><h2>The command center</h2><p role="status">{connecting ? "Connecting to the computation service…" : "Computation service unavailable. Start the backend and reconnect. No scenarios or results have been substituted."}</p><button className="primary-button" disabled={connecting} onClick={() => {setConnecting(true); void loadScenarios();}}>Reconnect</button></section>;
   const canCompare =
     algorithm !== "greedy" &&
     results.qaoa?.status === "ok" &&

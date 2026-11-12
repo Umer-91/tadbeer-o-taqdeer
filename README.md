@@ -63,3 +63,7 @@ Compare the local HEAD with the corresponding remote branch hash. For the fronte
 Commit tested work with meaningful messages, update `docs/PROGRESS.md`, push without force, and verify the remote hash. Keep secrets, virtual environments, and generated dependency directories out of Git. Keep lockfiles and measured experiment outputs in Git.
 
 **Deadline:** November 12, 2026 at 23:59 Pakistan time (18:59 UTC). No commits or pushes at or after the cutoff. Making the repository public and submitting the project require explicit user approval.
+
+## Integrated local startup
+
+On phase-3-release, follow backend/README.md to install the Python lockfile. In terminal one run `.venv/Scripts/python.exe -m uvicorn raasta.api:app --host 127.0.0.1 --port 8000`. In terminal two use `cd frontend`, `npm ci`, `npm run build`, then `npm run start`. Open http://127.0.0.1:3000; Swagger is at http://127.0.0.1:8000/docs. Phase 3 verification status and outstanding gates are in docs/FINAL_STATUS.md. The Word report exists but is not yet visually verified. No submission has been performed.

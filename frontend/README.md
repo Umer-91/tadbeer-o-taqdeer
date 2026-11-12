@@ -37,3 +37,7 @@ Phase 3 must implement the API/CORS, remove the scenario fixture fallback for fi
 `npm test` exercises the client boundary, including reading the actual committed Phase 1 Qiskit acceptance record. Test payloads never enter the application bundle. See [visual QA](../docs/FRONTEND_QA.md), [design and licenses](../docs/FRONTEND_DESIGN.md), and [progress](../docs/PROGRESS.md).
 
 Direct versions and transitive dependencies are pinned in `package-lock.json`. TypeScript 6.0.3 and ESLint 9.39.5 match the installed Next.js lint plugins; ESLint 9 is upstream end-of-support, so revisit this when those plugins support ESLint 10. A scoped minimatch 11.0.1 override fixes the parser's glob amplification advisory; the complete lint/typecheck/test/build gates passed with it. Do not force dependency upgrades without rerunning those checks.
+
+## Phase 3 integration checkpoint
+
+The frontend now fetches scenarios from the running FastAPI service. No preview scenario is substituted if loading fails. Start the backend in another terminal with `.venv/Scripts/python.exe -m uvicorn raasta.api:app --host 127.0.0.1 --port 8000` from the repository root. Then run the frontend as above. Live browser verification remains pending; see docs/FINAL_STATUS.md.
