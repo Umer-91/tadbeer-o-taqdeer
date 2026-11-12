@@ -2,7 +2,7 @@
 
 Project: **TADBEER-O-TAQDEER (تدبیر و تقدیر)** — Where Strategy Shapes Destiny.
 
-## Current status: Phase 2 locally validated; push pending
+## Current status: Phase 2 complete and verified on GitHub
 
 User requested continuation after Phase 1. Implemented the Phase 2 frontend on `phase-2-frontend`, preserving all four specifications and leaving `backend/` and `experiments/` unchanged. GitHub main already contains the user's Phase 1 PR merge at **`deba0b9a48526226d2e9349a08207e405e8f37db`**; local branches were fast-forwarded to that integration point without overwriting work.
 
@@ -12,7 +12,8 @@ User requested continuation after Phase 1. Implemented the Phase 2 frontend on `
 - HTTP preview returned **200**. Browser inspection at 1440×900, 1280×800, and 390×844 found no horizontal document overflow. Verified loaded Nastaliq text, 3D orbit/hover, story changes, keyboard budget and map inspection, scenario/algorithm controls, offline run error, evidence expansion, and 2D/3D switching. Corrected a scene-label cleanup error; regression produced no new console errors.
 - Screenshots, observed checks, and explicit limitations: [FRONTEND_QA.md](FRONTEND_QA.md). Design/provenance: [FRONTEND_DESIGN.md](FRONTEND_DESIGN.md). Reproduction: [frontend README](../frontend/README.md).
 - Phase 3 remains unstarted: implement FastAPI/CORS, remove scenario fixture fallback, connect actual computations, and verify integrated success/comparison/QASM and failure states. Reduced-motion OS emulation, forced WebGL loss, screen-reader speech, contrast measurements, and FPS were not tested. R3F emits a nonfatal Three.js Clock deprecation warning; the compatible ESLint 9 line is upstream end-of-support and needs revisiting when its plugins support ESLint 10.
-- Latest verified pre-Phase-2 remote: `main` **`deba0b9a48526226d2e9349a08207e405e8f37db`**; Phase 1 tip **`dfb0b12a119fc615cde0255a7b9c252e21bc160d`**. Phase 2 commit/push verification will be recorded after the operation succeeds.
+- Phase 2 implementation committed as **`ff70588967f3e9a5cf637687b1063999a56bbce0`**, message `feat: cinematic lifeline experience and dashboard UI`. `git push -u origin phase-2-frontend` succeeded; local `git rev-parse HEAD` and `git ls-remote origin refs/heads/phase-2-frontend` returned that identical hash. The working tree was clean. No backend/specification changes, generated dependencies, environment credentials, or force-push were included.
+- This verification entry is a subsequent documentation commit; its own tip hash is reported in the chat handoff and verified with the same commands. `main` remains the existing Phase 1 PR merge **`deba0b9a48526226d2e9349a08207e405e8f37db`**; Phase 1 branch tip remains **`dfb0b12a119fc615cde0255a7b9c252e21bc160d`**. The owned preview server was stopped after QA. Phase 3 has not begun.
 
 ## Phase 1 complete and verified on GitHub
 
