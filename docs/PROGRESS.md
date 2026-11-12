@@ -2,7 +2,7 @@
 
 Project: **TADBEER-O-TAQDEER (تدبیر و تقدیر)** — Where Strategy Shapes Destiny.
 
-## Current status: Phase 1 locally verified; commit/push verification pending
+## Current status: Phase 1 complete and verified on GitHub
 
 The user supplied approval to locate/use their existing local Python. The launcher was outside PATH; running `C:\Users\ua910\AppData\Local\Programs\Python\Launcher\py.exe -0p` located Python **3.12.10** at `C:\Users\ua910\AppData\Local\Programs\Python\Python312\python.exe`. Created **C:\Hackathon\.venv** with that interpreter and installed the exact lockfile plus the editable backend. Existing Python installations and the previous backend virtual environment were not modified/uninstalled. No security settings changed, no cloud execution used.
 
@@ -39,8 +39,9 @@ Limitations: noiseless classical simulation; exponential 64-state Hamiltonian co
 
 ### Handoff and remaining scope
 
-- Branch `phase-1-quantum`. Local Phase 1 acceptance gates passed; feature commit and remote hash verification pending below.
-- Latest previously verified remote commit: `3a079c7f48934705b06fa15276e9538fd88780e3` (setup).
+- Branch `phase-1-quantum`. Local Phase 1 acceptance gates passed. Committed as **`ecae665c98341679899851bf2d2cbc20244ad765`**, message `feat: verified lifeline optimization core`.
+- `git push -u origin phase-1-quantum` succeeded; `git rev-parse HEAD` and `git ls-remote origin refs/heads/phase-1-quantum` both returned **`ecae665c98341679899851bf2d2cbc20244ad765`**. Working tree was clean. This verification entry is a subsequent documentation commit; its own tip hash is reported in the chat handoff and can be checked with the same commands.
+- Staged source bytes matched the experiment source hashes; staged whitespace and credential-pattern checks passed; no virtual environment or generated dependency directory was tracked.
 - Phase 2 frontend and Phase 3 API/report/integration have not started. Stop at the Phase 1 gate pending user instruction.
 - Deadline remains 2026-11-12 23:59 PKT (18:59 UTC). No commits/pushes at or after cutoff. Public visibility was approved; submission still requires approval.
 
