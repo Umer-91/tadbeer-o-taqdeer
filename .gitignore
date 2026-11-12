@@ -1,0 +1,51 @@
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+!**/.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+service-account*.json
+.aws/
+.codex/
+.agents/
+
+# Python environments, caches and build output
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# JavaScript dependencies and generated output
+node_modules/
+.next/
+out/
+.turbo/
+coverage/
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Local tooling and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+~$*
+
+# Lockfiles and measured experiments/results are intentionally tracked.
