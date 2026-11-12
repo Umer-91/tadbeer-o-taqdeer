@@ -18,17 +18,22 @@ Project: **TADBEER-O-TAQDEER (تدبیر و تقدیر)** — Where Strategy Sha
 - `git ls-files` / staged diff review: scaffold and documentation only; no environments or dependency directories staged.
 - `git check-ignore`: secret/environment/dependency paths ignored; example environment files, package lockfiles, and measured result files remain trackable.
 - Staged-file credential-pattern scan: no matches for checked private-key, GitHub-token, and AWS-key patterns. This is a limited pattern check, not a guarantee against every secret format.
-- Initial commit, push, remote/local hash comparison, and fresh clone verification pending.
+- `git push -u origin main`: succeeded for initial setup commit `c70044e95400a8b4d60a50f8e50884290512a368`.
+- `git rev-parse HEAD` and `git ls-remote origin refs/heads/main`: matched that full hash.
+- `git clone --single-branch --branch main https://github.com/Umer-91/tadbeer-o-taqdeer.git <fresh temporary directory>`: succeeded. This was a clean checkout on the same machine using existing authorized credentials, not a test performed on a second physical machine.
+- Fresh clone's HEAD matched; Git blob hashes for all four specifications matched the workspace after normal line-ending handling. `git fsck --full` in the clone passed. Working tree was clean.
 
 Application tests/builds/benchmarks: **not run; application is not implemented**.
 
 ## Latest verified commit
 
-None yet. Initial commit and remote verification pending. A follow-up progress entry will record the verified setup commit after the push; a document cannot contain its own final commit hash.
+Verified setup commit: **`c70044e95400a8b4d60a50f8e50884290512a368`**, local main = remote main = fresh clone HEAD, verified on 2026-11-12 before the deadline.
+
+This entry is committed in a subsequent documentation commit. Its own hash cannot be embedded in itself; use `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` for the latest tip and compare them. Final documentation/branch verification is reported in the setup handoff.
 
 ## Remaining and blockers
 
-- Complete setup verification and push before starting Phase 1.
+- Repository setup and initial push verified. No setup blocker remains for Git access. Future pushes are possible with the current credential manager while authorization remains valid and before the cutoff.
 - Begin Phase 1 only on a separate user instruction.
 - Phases 1–3, real experiments, report, demo, and submission remain unimplemented.
 - User approval is required before public visibility or submission.
