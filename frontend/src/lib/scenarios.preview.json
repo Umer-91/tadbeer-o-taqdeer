@@ -1,0 +1,458 @@
+[
+  {
+    "id": "flood_baseline",
+    "name": "Synthetic valley flood",
+    "description": "Fictional flood/landslide damage; all six interventions are available.",
+    "budget_default": 9,
+    "actions": [
+      {
+        "id": "bridge_repair",
+        "index": 0,
+        "label": "Repair main bridge",
+        "cost": 4,
+        "enabled": true
+      },
+      {
+        "id": "temporary_crossing",
+        "index": 1,
+        "label": "Establish temporary crossing",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "hospital_road",
+        "index": 2,
+        "label": "Repair hospital access road",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "feeder_repair",
+        "index": 3,
+        "label": "Repair electricity feeder",
+        "cost": 4,
+        "enabled": true
+      },
+      {
+        "id": "hospital_solar",
+        "index": 4,
+        "label": "Install hospital solar-battery backup",
+        "cost": 3,
+        "enabled": true
+      },
+      {
+        "id": "pump_generator",
+        "index": 5,
+        "label": "Deploy pump generator",
+        "cost": 2,
+        "enabled": true
+      }
+    ],
+    "nodes": [
+      {
+        "id": "entry",
+        "label": "Valley entry",
+        "kind": "gateway",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "village_a",
+        "label": "Fictional Village A",
+        "kind": "village",
+        "population": 400,
+        "priority_weight": 1.0
+      },
+      {
+        "id": "village_b",
+        "label": "Fictional Village B",
+        "kind": "village",
+        "population": 250,
+        "priority_weight": 1.2
+      },
+      {
+        "id": "village_c",
+        "label": "Fictional Village C",
+        "kind": "village",
+        "population": 350,
+        "priority_weight": 1.1
+      },
+      {
+        "id": "hospital",
+        "label": "Fictional valley hospital",
+        "kind": "hospital",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "feeder",
+        "label": "Damaged feeder",
+        "kind": "power",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "pump",
+        "label": "Fictional water pump",
+        "kind": "water",
+        "population": null,
+        "priority_weight": null
+      }
+    ],
+    "links": [
+      {
+        "id": "crossing",
+        "source": "entry",
+        "target": "village_a",
+        "lifeline": "road",
+        "action_ids": ["bridge_repair", "temporary_crossing"],
+        "currently_working": false
+      },
+      {
+        "id": "hospital_route",
+        "source": "village_a",
+        "target": "hospital",
+        "lifeline": "road",
+        "action_ids": ["hospital_road"],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_hospital",
+        "source": "feeder",
+        "target": "hospital",
+        "lifeline": "electricity",
+        "action_ids": ["feeder_repair"],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_pump",
+        "source": "feeder",
+        "target": "pump",
+        "lifeline": "electricity",
+        "action_ids": ["feeder_repair"],
+        "currently_working": false
+      },
+      {
+        "id": "water_b",
+        "source": "pump",
+        "target": "village_b",
+        "lifeline": "water",
+        "action_ids": ["feeder_repair", "pump_generator"],
+        "currently_working": false
+      },
+      {
+        "id": "water_c",
+        "source": "pump",
+        "target": "village_c",
+        "lifeline": "water",
+        "action_ids": ["feeder_repair", "pump_generator"],
+        "currently_working": false
+      }
+    ],
+    "synthetic": true
+  },
+  {
+    "id": "bridge_blocked",
+    "name": "Synthetic bridge unavailable",
+    "description": "Fictional bridge repair cannot be undertaken; temporary crossing remains available.",
+    "budget_default": 9,
+    "actions": [
+      {
+        "id": "bridge_repair",
+        "index": 0,
+        "label": "Repair main bridge",
+        "cost": 4,
+        "enabled": false
+      },
+      {
+        "id": "temporary_crossing",
+        "index": 1,
+        "label": "Establish temporary crossing",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "hospital_road",
+        "index": 2,
+        "label": "Repair hospital access road",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "feeder_repair",
+        "index": 3,
+        "label": "Repair electricity feeder",
+        "cost": 4,
+        "enabled": true
+      },
+      {
+        "id": "hospital_solar",
+        "index": 4,
+        "label": "Install hospital solar-battery backup",
+        "cost": 3,
+        "enabled": true
+      },
+      {
+        "id": "pump_generator",
+        "index": 5,
+        "label": "Deploy pump generator",
+        "cost": 2,
+        "enabled": true
+      }
+    ],
+    "nodes": [
+      {
+        "id": "entry",
+        "label": "Valley entry",
+        "kind": "gateway",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "village_a",
+        "label": "Fictional Village A",
+        "kind": "village",
+        "population": 400,
+        "priority_weight": 1.0
+      },
+      {
+        "id": "village_b",
+        "label": "Fictional Village B",
+        "kind": "village",
+        "population": 250,
+        "priority_weight": 1.2
+      },
+      {
+        "id": "village_c",
+        "label": "Fictional Village C",
+        "kind": "village",
+        "population": 350,
+        "priority_weight": 1.1
+      },
+      {
+        "id": "hospital",
+        "label": "Fictional valley hospital",
+        "kind": "hospital",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "feeder",
+        "label": "Damaged feeder",
+        "kind": "power",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "pump",
+        "label": "Fictional water pump",
+        "kind": "water",
+        "population": null,
+        "priority_weight": null
+      }
+    ],
+    "links": [
+      {
+        "id": "crossing",
+        "source": "entry",
+        "target": "village_a",
+        "lifeline": "road",
+        "action_ids": ["bridge_repair", "temporary_crossing"],
+        "currently_working": false
+      },
+      {
+        "id": "hospital_route",
+        "source": "village_a",
+        "target": "hospital",
+        "lifeline": "road",
+        "action_ids": ["hospital_road"],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_hospital",
+        "source": "feeder",
+        "target": "hospital",
+        "lifeline": "electricity",
+        "action_ids": ["feeder_repair"],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_pump",
+        "source": "feeder",
+        "target": "pump",
+        "lifeline": "electricity",
+        "action_ids": ["feeder_repair"],
+        "currently_working": false
+      },
+      {
+        "id": "water_b",
+        "source": "pump",
+        "target": "village_b",
+        "lifeline": "water",
+        "action_ids": ["feeder_repair", "pump_generator"],
+        "currently_working": false
+      },
+      {
+        "id": "water_c",
+        "source": "pump",
+        "target": "village_c",
+        "lifeline": "water",
+        "action_ids": ["feeder_repair", "pump_generator"],
+        "currently_working": false
+      }
+    ],
+    "synthetic": true
+  },
+  {
+    "id": "grid_extended_outage",
+    "name": "Synthetic extended grid outage",
+    "description": "Fictional feeder repair is unavailable; local power alternatives remain available.",
+    "budget_default": 9,
+    "actions": [
+      {
+        "id": "bridge_repair",
+        "index": 0,
+        "label": "Repair main bridge",
+        "cost": 4,
+        "enabled": true
+      },
+      {
+        "id": "temporary_crossing",
+        "index": 1,
+        "label": "Establish temporary crossing",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "hospital_road",
+        "index": 2,
+        "label": "Repair hospital access road",
+        "cost": 2,
+        "enabled": true
+      },
+      {
+        "id": "feeder_repair",
+        "index": 3,
+        "label": "Repair electricity feeder",
+        "cost": 4,
+        "enabled": false
+      },
+      {
+        "id": "hospital_solar",
+        "index": 4,
+        "label": "Install hospital solar-battery backup",
+        "cost": 3,
+        "enabled": true
+      },
+      {
+        "id": "pump_generator",
+        "index": 5,
+        "label": "Deploy pump generator",
+        "cost": 2,
+        "enabled": true
+      }
+    ],
+    "nodes": [
+      {
+        "id": "entry",
+        "label": "Valley entry",
+        "kind": "gateway",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "village_a",
+        "label": "Fictional Village A",
+        "kind": "village",
+        "population": 400,
+        "priority_weight": 1.0
+      },
+      {
+        "id": "village_b",
+        "label": "Fictional Village B",
+        "kind": "village",
+        "population": 250,
+        "priority_weight": 1.2
+      },
+      {
+        "id": "village_c",
+        "label": "Fictional Village C",
+        "kind": "village",
+        "population": 350,
+        "priority_weight": 1.1
+      },
+      {
+        "id": "hospital",
+        "label": "Fictional valley hospital",
+        "kind": "hospital",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "feeder",
+        "label": "Damaged feeder",
+        "kind": "power",
+        "population": null,
+        "priority_weight": null
+      },
+      {
+        "id": "pump",
+        "label": "Fictional water pump",
+        "kind": "water",
+        "population": null,
+        "priority_weight": null
+      }
+    ],
+    "links": [
+      {
+        "id": "crossing",
+        "source": "entry",
+        "target": "village_a",
+        "lifeline": "road",
+        "action_ids": ["bridge_repair", "temporary_crossing"],
+        "currently_working": false
+      },
+      {
+        "id": "hospital_route",
+        "source": "village_a",
+        "target": "hospital",
+        "lifeline": "road",
+        "action_ids": ["hospital_road"],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_hospital",
+        "source": "feeder",
+        "target": "hospital",
+        "lifeline": "electricity",
+        "action_ids": ["feeder_repair"],
+        "currently_working": false
+      },
+      {
+        "id": "feeder_pump",
+        "source": "feeder",
+        "target": "pump",
+        "lifeline": "electricity",
+        "action_ids": ["feeder_repair"],
+        "currently_working": false
+      },
+      {
+        "id": "water_b",
+        "source": "pump",
+        "target": "village_b",
+        "lifeline": "water",
+        "action_ids": ["feeder_repair", "pump_generator"],
+        "currently_working": false
+      },
+      {
+        "id": "water_c",
+        "source": "pump",
+        "target": "village_c",
+        "lifeline": "water",
+        "action_ids": ["feeder_repair", "pump_generator"],
+        "currently_working": false
+      }
+    ],
+    "synthetic": true
+  }
+]

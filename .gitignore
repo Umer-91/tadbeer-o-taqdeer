@@ -12,6 +12,7 @@ service-account*.json
 .aws/
 .codex/
 .agents/
+.tools/
 
 # Python environments, caches and build output
 .venv/
