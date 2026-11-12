@@ -126,3 +126,13 @@ This entry is committed in a subsequent documentation commit. Its own hash canno
 Implemented API and live scenario loading on phase-3-release from 59b09f2. Backend tests: 121 passed in 2.80s; frontend lint/typecheck/build passed. Nine fresh quantum benchmarks saved to benchmark-phase3-seed42.json; verifier passed all 27 solver records. API health returned qiskit_available true; frontend returned HTTP 200. Root pip check passed. Existing evaluator/solver source preserved.
 
 Created AGENTS.md, CODEX_HANDOFF.md, architecture/dependency PNGs, report.docx with real results, reproducible report builder, three-minute script and submission checklist. Report rendering failed because bundled LibreOffice soffice.exe is unavailable. Browser tool reports local browser access unavailable. Integrated browser verification, clean install reproduction and Word visual QA remain incomplete. No final-release or submission claim. Latest checkpoint commit is discoverable with git log; remote hash must be checked after push.
+
+## Final submission documentation update — 12 November 2026
+
+- Rewrote the judge-facing root README and expanded docs/report.docx from the saved nine-case benchmark. Team names and university included; worked example explains 011100, cost 8 and utility 96.
+- Verified all 27 saved plans against the evaluator, nine shot totals and feasibility rates, every numerical result-table cell, and exact embedded bytes for architecture.png and dependencies.png. No nine-case QAOA rerun.
+- Removed tracked docs/demo_script.md at the user's request. Recording script delivered only in chat; checklist reference updated. Original specifications remain preserved.
+- Checks this session: 68 model tests passed; 11 frontend client tests passed; git diff --check passed. Full backend attempt produced no output and was interrupted; no full-suite success claimed for this session.
+- Report renderer failed because bundled LibreOffice soffice.exe is unavailable. Word layout and final page count require manual inspection. Local HTTP smoke attempt could not connect to ports 8000 or 3000: servers were not running. Earlier user-provided browser outputs remain separate evidence.
+- Fetched origin/main at 80fe084; its tree matches this branch's pre-documentation HEAD 53e3bb9e99265175b1270045ab90c22bf041bcca. Preserved existing uncommitted backend/raasta/api.py and backend/tests/test_api.py; they are not part of this documentation commit.
+- Remaining user tasks: inspect Word report, record/upload video with link access, and submit the form. No form submitted. Commit and remote verification for this documentation update are reported in chat; no commit or push permitted at/after 18:59 UTC.
